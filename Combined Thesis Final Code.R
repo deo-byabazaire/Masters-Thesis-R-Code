@@ -786,9 +786,15 @@ data_long1 <- data_long %>% group_by(Variable) %>%
               summarise(Total = sum(Value)) 
 
 # Plot the density of all variables against the categorical variable
+                                   library(viridis)
+color_palette <- c("#67001f", "#00441b", "#99d8c9", "#000000", "#993404",
+                   "#081d58", "#a1d99b", "#810f7c", "#0868ac", "#fee8c8",
+                   "#fed976", "#67a9cf", "#e7298a", "#c994c7", "#41ab5d",
+                   "#41b6c4", "#4d004b", "#ec7014", "#e31a1c", "#fcbba1",
+                   "#cab2d6", "#8c510a", "#f7f7f7", "#4d4d4d", "#d9ef8b")
 ggplot(data_long, aes(x = CST, y = Value, fill = Variable)) +
   geom_bar(stat = "identity", width = 0.7) + theme_classic() +
-  scale_fill_viridis(discrete=TRUE, name = "Species") +
+  scale_fill_manual(values = color_palette,  name = "Species") +
   labs(x = "CSTs", y = "Total Abundance") + theme_bw()  + 
   theme(legend.position="bottom", legend.justification="center",
         plot.title = element_text(hjust = 0.5, face = "bold", size = 16),
