@@ -112,7 +112,7 @@ sum(df_taxas11 == 0)/(nrow(df_taxas11)*ncol(df_taxas11))
 # filtering out missing values
 sum(is.na(df_meta_33$pcos_score)) # 8
 df_metadata33 <- df_meta_33 %>% filter(!is.na(pcos_score), !is.na(Gest_week),
-                                       # pcos_score %in% c('Yes', 'No'),
+                                       pcos_score %in% c('Yes', 'No'),
                                        Age_groups_2 %in% c(1,2,3,4,5),
                                        parity %in% c('Multiparous', 'Nulliparous'),
                                        Pregnancy_week %in% c('Under 8','8 to 11',
