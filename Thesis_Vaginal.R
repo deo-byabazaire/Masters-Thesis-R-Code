@@ -473,33 +473,33 @@ grid.arrange(Alpha_vaginal, Alpha_fecal, ncol = 1)
 set.seed(2023)
 #* Others # centered log-ratio (CLR) --- Considered
 df_phyloseq_clr <- microbiome::transform(df_phyloseq, "clr")
-taxa_bray <- phyloseq::distance(df_phyloseq_clr, method = "euclidean")
+taxa_euclidean <- phyloseq::distance(df_phyloseq_clr, method = "euclidean")
 df_meta2 <- data.frame(sample_data(df_phyloseq))
 
 # Homogeneity of dispersion test
-beta <- betadisper(taxa_bray, df_meta2$pcos_score)
+beta <- betadisper(taxa_euclidean, df_meta2$pcos_score)
 xtable::xtable(anova(beta), digits = 4)
 tabb <- permutest(beta)
 anova(beta)
 
 # Adonis test for pcos_score (PERMANOVA)
 set.seed(2023)
-perm_pcos <- adonis2(taxa_bray ~ PCOS, data = df_meta2) 
+perm_pcos <- adonis2(taxa_euclidean ~ PCOS, data = df_meta2) 
 perm_pcos # p = 0.459
 set.seed(2023)
-perm_gestW <- adonis2(taxa_bray ~ Gest_week, data = df_meta2) 
+perm_gestW <- adonis2(taxa_euclidean ~ Gest_week, data = df_meta2) 
 perm_gestW # p = 0.721
 set.seed(2023)
-perm_age <- adonis2(taxa_bray ~ Age_groups_2, data = df_meta2) 
+perm_age <- adonis2(taxa_euclidean ~ Age_groups_2, data = df_meta2) 
 perm_age # p = 0.166 (significant)
 set.seed(2023)
-perm_fert <- adonis2(taxa_bray ~ Subfertility_, data = df_meta2) 
+perm_fert <- adonis2(taxa_euclidean ~ Subfertility_, data = df_meta2) 
 perm_fert # p =  0.001 (significant)
 set.seed(2023)
-perm_BMI_c <- adonis2(taxa_bray ~ factor(BMI_category), data = df_meta2) 
+perm_BMI_c <- adonis2(taxa_euclidean ~ factor(BMI_category), data = df_meta2) 
 perm_BMI_c # p = 0.001 (significant)
 set.seed(2023)
-perm_parity <- adonis2(taxa_bray ~ parity, data = df_meta2) 
+perm_parity <- adonis2(taxa_euclidean ~ parity, data = df_meta2) 
 perm_parity # p = 0.003 (significant)
 
 Beta_F <- data.frame(Parameters = c('PCOS', 'Gestation weeks','Age groups', 'Fertility Treatment', 'BMI categories', 'Parity'),
